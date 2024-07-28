@@ -1,10 +1,22 @@
-import { StyleSheet, Image } from "react-native";
+import React from 'react';
+import { Image, StyleSheet, View, Text } from 'react-native';
 
-const ImageViewer = (props) => {
-    return (
-        <Image source={props.placeholderImgSrc} style={styles.image} />
-    )
-}
+const ImageViewer = ({ selectedImg, placeholderImgSrc }) => {
+  // Check if the selected image exists; if not, use the placeholder
+  const imgSrc = selectedImg ? { uri: selectedImg } : placeholderImgSrc;
+
+  return (
+    <View style={styles.container}>
+      {imgSrc ? (
+        <Image source={imgSrc} style={styles.image} />
+      ) : (
+        <View style={styles.placeholder}>
+          <Text>No image available</Text>
+        </View>
+      )}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
     image: {
